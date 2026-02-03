@@ -1,0 +1,16 @@
+stages:
+  train:
+    cmd: python src/ecg_anomaly_detection/models/train.py
+    deps:
+      - src/ecg_anomaly_detection/models/train.py
+      - src/ecg_anomaly_detection/models/lstm_autoencoder.py
+    outs:
+      - artifacts/model.pth
+
+  evaluate:
+    cmd: python src/ecg_anomaly_detection/models/evaluate.py
+    deps:
+      - artifacts/model.pth
+      - src/ecg_anomaly_detection/models/evaluate.py
+    outs:
+      - artifacts/threshold.json
